@@ -1,0 +1,142 @@
+import Image from "next/image";
+import Link from "next/link";
+import { FaArrowLeft, FaStar, FaRegCalendarAlt, FaCheck } from "react-icons/fa";
+import { LuMapPin } from "react-icons/lu";
+import { FiEdit2, FiTrash2, FiArrowRight } from "react-icons/fi";
+const DestinationDetailsPage = async ({ params }) => {
+  const { id } = await params;
+
+  const res = await fetch(`http://localhost:5000/destination/${id}`);
+  const destination = await res.json();
+
+  return (
+    <div className="max-w-7xl mx-auto px-5 py-10">
+      {/* Top */}
+      <div className="flex justify-between items-center mb-6">
+        <Link
+          href="/destinations"
+          className="flex items-center gap-2 text-gray-600 hover:text-sky-500"
+        >
+          <FaArrowLeft />
+          Back to Destinations
+        </Link>
+
+        <div className="flex gap-3">
+          <button className="border px-5 py-2 flex items-center gap-2 hover:bg-gray-100">
+            <FiEdit2 />
+            Edit
+          </button>
+
+          <button className="border border-red-300 text-red-500 px-5 py-2 flex items-center gap-2 hover:bg-red-50">
+            <FiTrash2 />
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      {/* Banner */}
+      <div className="relative w-full h-[500px]">
+        <Image
+          src={destination.imageUrl}
+          fill
+          alt={destination.destinationName}
+          className="object-cover rounded-xl"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="grid lg:grid-cols-3 gap-10 mt-10">
+        {/* Left */}
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-2 text-gray-500">
+            <LuMapPin />
+            {destination.country}
+          </div>
+
+          <h1 className="text-5xl font-light mt-3">
+            {destination.destinationName}
+          </h1>
+
+          <div className="flex gap-5 mt-4">
+            <div className="flex items-center gap-1 text-green-600">
+              <FaStar />
+              <span>{destination.rating}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaRegCalendarAlt />
+              <span>
+                {destination.duration} Days / {destination.duration - 1} Nights
+              </span>
+            </div>
+          </div>
+
+          <h2 className="text-3xl mt-10 mb-4 font-medium">Overview</h2>
+
+          <p className="text-gray-600 leading-8">{destination.description}</p>
+
+          <h2 className="text-3xl mt-10 mb-5 font-medium">Highlights</h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Luxury beachfront accommodation
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Visit famous attractions
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Traditional local cuisine
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Private guided tour
+            </div>
+          </div>
+        </div>
+
+        {/* Right */}
+        <div className="border rounded-lg shadow p-6 h-fit">
+          <p className="text-gray-500">Starting from</p>
+
+          <h2 className="text-5xl font-bold text-sky-500 mt-2">
+            ${destination.price}
+          </h2>
+
+          <p className="text-gray-500 mb-5">per person</p>
+
+          <div className="border p-3 rounded">{destination.departureDate}</div>
+
+          <button className="w-full bg-sky-500 hover:bg-sky-600 text-white py-3 mt-5 flex justify-center items-center gap-2">
+            Book Now
+            <FiArrowRight />
+          </button>
+
+          <div className="mt-6 space-y-3">
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Free cancellation up to 7 days
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              Travel insurance included
+            </div>
+
+            <div className="flex items-center gap-2">
+              <FaCheck className="text-green-500" />
+              24/7 customer support
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DestinationDetailsPage;
