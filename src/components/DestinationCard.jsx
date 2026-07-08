@@ -7,6 +7,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 const DestinationCard = ({ destination }) => {
   const { imageUrl, price, destinationName, duration, country, _id } =
     destination;
+    console.log(imageUrl);
 
   return (
     <div className="rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { FaArrowLeft, FaStar, FaRegCalendarAlt, FaCheck } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
 import { FiEdit2, FiTrash2, FiArrowRight } from "react-icons/fi";
+import { EditModal } from "@/components/EditModal";
+import { DeleteDestination } from "@/components/DeleteDestinaion";
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
 
@@ -21,16 +23,9 @@ const DestinationDetailsPage = async ({ params }) => {
           Back to Destinations
         </Link>
 
-        <div className="flex gap-3">
-          <button className="border px-5 py-2 flex items-center gap-2 hover:bg-gray-100">
-            <FiEdit2 />
-            Edit
-          </button>
-
-          <button className="border border-red-300 text-red-500 px-5 py-2 flex items-center gap-2 hover:bg-red-50">
-            <FiTrash2 />
-            Cancel
-          </button>
+        <div className="flex items-center gap-2">
+          <EditModal destination={destination}/>
+          <DeleteDestination destination={destination}/>
         </div>
       </div>
 
