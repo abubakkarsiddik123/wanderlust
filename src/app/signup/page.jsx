@@ -37,6 +37,11 @@ const SignUpPage = () => {
       toast.error(error.message);
     }
   };
+    const handleGoogleSignIn = async () => {
+      await authClient.signIn.social({
+        provider: "google",
+      });
+    };
 
   return (
     <div className="mt-20">
@@ -109,7 +114,7 @@ const SignUpPage = () => {
               </span>
             </div>
           </div>
-          <Button variant="outline" className="w-full rounded-none">
+          <Button onClick={handleGoogleSignIn} variant="outline" className="w-full rounded-none">
             <FcGoogle size={20} />
             Sign Up With Google
           </Button>
