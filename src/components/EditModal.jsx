@@ -31,7 +31,7 @@ export function EditModal({ destination }) {
     category,
     departureDate,
   } = destination;
-  console.log(destination);
+  // console.log(destination);
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -45,7 +45,7 @@ export function EditModal({ destination }) {
       body: JSON.stringify(destination),
     });
     const data =await res.json();
-    console.log(data);
+    // console.log(data);
     toast.success("destination edit successful!");
   };
   return (

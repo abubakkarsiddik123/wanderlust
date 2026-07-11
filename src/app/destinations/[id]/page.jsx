@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft, FaStar, FaRegCalendarAlt, FaCheck } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
-import { FiEdit2, FiTrash2, FiArrowRight } from "react-icons/fi";
 import { EditModal } from "@/components/EditModal";
 import { DeleteDestination } from "@/components/DeleteDestinaion";
+
+import BookingCard from "@/components/BookingCard";
+
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
 
@@ -24,8 +26,8 @@ const DestinationDetailsPage = async ({ params }) => {
         </Link>
 
         <div className="flex items-center gap-2">
-          <EditModal destination={destination}/>
-          <DeleteDestination destination={destination}/>
+          <EditModal destination={destination} />
+          <DeleteDestination destination={destination} />
         </div>
       </div>
 
@@ -96,39 +98,7 @@ const DestinationDetailsPage = async ({ params }) => {
         </div>
 
         {/* Right */}
-        <div className="border rounded-lg shadow p-6 h-fit">
-          <p className="text-gray-500">Starting from</p>
-
-          <h2 className="text-5xl font-bold text-sky-500 mt-2">
-            ${destination.price}
-          </h2>
-
-          <p className="text-gray-500 mb-5">per person</p>
-
-          <div className="border p-3 rounded">{destination.departureDate}</div>
-
-          <button className="w-full bg-sky-500 hover:bg-sky-600 text-white py-3 mt-5 flex justify-center items-center gap-2">
-            Book Now
-            <FiArrowRight />
-          </button>
-
-          <div className="mt-6 space-y-3">
-            <div className="flex items-center gap-2">
-              <FaCheck className="text-green-500" />
-              Free cancellation up to 7 days
-            </div>
-
-            <div className="flex items-center gap-2">
-              <FaCheck className="text-green-500" />
-              Travel insurance included
-            </div>
-
-            <div className="flex items-center gap-2">
-              <FaCheck className="text-green-500" />
-              24/7 customer support
-            </div>
-          </div>
-        </div>
+        <BookingCard destination={destination} />
       </div>
     </div>
   );
