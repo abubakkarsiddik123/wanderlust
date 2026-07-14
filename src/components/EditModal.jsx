@@ -44,7 +44,7 @@ export function EditModal({ destination }) {
       },
       body: JSON.stringify(destination),
     });
-    const data =await res.json();
+    const data = await res.json();
     // console.log(data);
     toast.success("destination edit successful!");
   };
