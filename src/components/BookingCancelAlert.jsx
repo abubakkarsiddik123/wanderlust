@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { FaTrashAlt } from "react-icons/fa";
@@ -8,10 +9,13 @@ import { toast } from "react-toastify";
 export function BookingCancelAlert({ bookingId }) {
   const router = useRouter();
   const handleCancelBooking = async () => {
+    const result = await authClient.token();
+    console.log(result,"delete booking");
     const res = await fetch(`http://localhost:5000/booking/${bookingId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${result.data.token}`,
       },
     });
     const data = await res.json();

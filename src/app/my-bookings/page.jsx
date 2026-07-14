@@ -18,11 +18,20 @@ const MyBookingsPage = async () => {
 
   const user = session?.user;
 
+  const result = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  // console.log(result, "booking token");
+
   const res = await fetch(`http://localhost:5000/booking/${user.id}`, {
-    cache: "no-store",
+    headers: {
+      authorization: `Bearer ${result.token}`,
+    },
   });
 
   const bookings = await res.json();
+  // console.log(bookings, "all my bookings");
 
   return (
     <div className="max-w-7xl mx-auto py-10 px-4">
