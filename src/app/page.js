@@ -1,11 +1,19 @@
 import Banner from "@/components/Banner";
-import Image from "next/image";
+import ChooseWanderlust from "@/components/ChooseWanderlust";
+import HomePage from "@/components/HomePage";
+import TravelSay from "@/components/TravelSay";
 
-export default function Home() {
+
+export default async function Home() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination`);
+  const destinations = await res.json();
   return (
-    <div>
-      <Banner/>
-     Home page
-    </div>
+    <>
+      <Banner />
+      <HomePage destinations={destinations}/>
+      <ChooseWanderlust/>
+      <TravelSay/>
+     
+    </>
   );
 }

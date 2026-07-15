@@ -31,7 +31,7 @@ const BookingCard = ({ destination }) => {
     console.log(tokenData);
 
     // console.log(bookingData);
-    const res = await fetch("http://localhost:5000/booking", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
